@@ -18,10 +18,15 @@ export class App extends Component {
   createUser = contact => {
     const { contacts } = this.state;
     const { name } = contact;
-    if (contacts.find(contact => name === contact.name)) {
+    const normalizedNewName = name.toLowerCase();
+
+    if (
+      contacts.find(contact => normalizedNewName === contact.name.toLowerCase())
+    ) {
       alert(`${name} is already in contacts`);
       return;
     }
+
     this.setState(prevState => {
       return { contacts: [contact, ...prevState.contacts] };
     });
